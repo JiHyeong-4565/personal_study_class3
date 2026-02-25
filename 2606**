@@ -1,0 +1,30 @@
+import sys
+
+computer = int(sys.stdin.readline())
+twin = int(sys.stdin.readline())
+collution_list = set()
+collution_list = {1}
+
+A=[]
+
+for i in range(twin):
+    a,b = map(int,sys.stdin.readline().split())
+    A.append([a,b])
+    
+A.sort()
+
+for k in range(twin):
+    for i in list(collution_list):
+        for j in A:
+            if i in j:
+                collution_list.update(j)
+
+print(len(collution_list)-1)
+
+###
+무엇이 비효율적일까요?
+현재 코드는 1번부터 10번까지 이미 감염이 끝났고 더 이상 퍼질 곳이 없는데도, 바깥쪽 k 반복문이 twin 번 채워질 때까지 의미 없는 확인 작업을 계속해서 반복합니다. 만약 컴퓨터가 100대이고 연결선이 4000개라면, 감염이 일찍 끝나도 4000번이나 전체를 또 뒤져보는 셈이죠.
+
+💡 개선 힌트 (스스로 해볼 수 있는 최적화):
+바깥쪽 반복문이 돌기 전의 collution_list 크기와, 안쪽 반복문을 다 돈 후의 collution_list 크기를 비교해 보세요. 만약 크기가 똑같다면 (더 이상 새롭게 감염된 컴퓨터가 없다면) 굳이 남은 k 반복문을 돌 필요 없이 break로 탈출해 버리면 속도가 훨씬 빨라질 것입니다!
+###
