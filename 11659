@@ -1,0 +1,18 @@
+import sys
+
+N,M = map(int,sys.stdin.readline().split())
+
+A = []
+
+A.extend(map(int,sys.stdin.readline().split()))
+
+B = [0]
+sum_A = 0 
+for i in A:
+    sum_A += i 
+    B.append(sum_A)
+
+for i in range(M):
+    start,end = map(int,sys.stdin.readline().split()) 
+
+    print(B[end] - B[start])
